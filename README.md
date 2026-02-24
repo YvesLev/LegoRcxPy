@@ -18,27 +18,27 @@ The firmware can be found at: https://pbrick.info/index.html-p=74.html
 - Then in the python shell, try the following:
 
 ```python
->>> from legorcx import RCX
->>> rcx=RCX("COM1")  # use the com port for you IR Tower.  For LINUX, make sure to set user permission for the port as reported by @Gunners TekZone on eurobricks.com. (ex.: ~$ sudo chmod o+rw /dev/ttyUSB0)
->>> rcx.snd(1) # should play BEEP BEEP
->>> rcx.mot(rcx.A).on()  # run motor on output A
->>> rcx.mot(rcx.A + rcx.B + rcx.C).on()  # run motors A, B, C
->>> rcx.mot(rxc.B + rcx.C).off()  # stop motors B and C (Brake)
->>> rcx.mot(rcx.A).float()  # coast to stop motor A
->>> rcx.mot(rcx.A).on()
->>> rcx.mot(rcx.A).r()  # Set reverse direction.
->>> rcx.mot(rcx.A).f()  # Set forward direction.
->>> rcx.mot(rcx.A).flip()  # flip direction.
->>> rcx.mot(rcx.A).pow(0)  # Set speed to minimum  pow(7) is the Maximum
+from legorcx import RCX
+rcx=RCX("COM1")  # use the com port for you IR Tower.  For LINUX, make sure to set user permission for the port as reported by @Gunners TekZone on eurobricks.com. (ex.: ~$ sudo chmod o+rw /dev/ttyUSB0)
+rcx.snd(1) # should play BEEP BEEP
+rcx.mot(rcx.A).on()  # run motor on output A
+rcx.mot(rcx.A + rcx.B + rcx.C).on()  # run motors A, B, C
+rcx.mot(rxc.B + rcx.C).off()  # stop motors B and C (Brake)
+rcx.mot(rcx.A).float()  # coast to stop motor A
+rcx.mot(rcx.A).on()
+rcx.mot(rcx.A).r()  # Set reverse direction.
+rcx.mot(rcx.A).f()  # Set forward direction.
+rcx.mot(rcx.A).flip()  # flip direction.
+rcx.mot(rcx.A).pow(0)  # Set speed to minimum  pow(7) is the Maximum
 
->>> rcx.close()  # Shutdown serial communication and any threads gracefully.
->>> rcx.pwroff() # Powers off the RCX Brick completely
+rcx.close()  # Shutdown serial communication and any threads gracefully.
+rcx.pwroff() # Powers off the RCX Brick completely
 
 ```
 
 Other rcx commands:
 ```python
-rcx.alive() : returns True if it detects the RCX, False otherwise.
+rcx.alive() # returns True if it detects the RCX, False otherwise.
 rcx.prg(5)  # Set program #5  (can use 1 to 5)
 rcx.start(taskno) # where taskno can be 0 to 9.  Default is 0 if not specified like in rcx.start().  I think starting task 0 is the same as pressing run button on rcx brick.
 rcx.stop(taskno)  # where taskno can be 0 to 9. if anything else is specified like stop(-1), it will stop all tasks.  This is the default (stop())
@@ -87,11 +87,13 @@ message are interesting because one IR tower might be used to make actions on di
     }
 
     Then, in python shell:
-    >>> from legorcx import RCX
-    >>> r=RCX("COM1")
-    >>> r.start()
-    >>> r.msg(11) # Motor A with run forward
-    >>> r.msg(10) # Motor A with stop and program will end.
+```python
+    from legorcx import RCX
+    r=RCX("COM1")
+    r.start()
+    r.msg(11) # Motor A with run forward
+    r.msg(10) # Motor A with stop and program will end.
+```
 
 ```python
 rcx.getval(sourceno, argno) # Reads the value corresponding to the source.  Argument depends on the source and defaut is 0.
@@ -112,20 +114,20 @@ rcx.getval(sourceno, argno) # Reads the value corresponding to the source.  Argu
     #    SrcMsg = 15	Returns value of message buffer. (argno = 0)
 
 ```
-    ex.: >>> v = rcx.getval(rcx.SrcSv,rcx.inp2) # v will contain the value of sensor at input #2
-    ex.: >>> m = rcx.getval(rcx.SrcMsg) # m will conaint the value of the message in the buffer
+    ex.: v = rcx.getval(rcx.SrcSv,rcx.inp2) # v will contain the value of sensor at input #2
+    ex.: m = rcx.getval(rcx.SrcMsg) # m will conaint the value of the message in the buffer
 
 EDIT: 2026-02-18
 Added LastCmdSerStr function that prints the last serial command byte string.
 Example:
 ```python
->>> from legorcx import RCX
->>> r=RCX("COM17")
->>> r.snd(2)
->>> r.LastCmdSerStr
+from legorcx import RCX
+r=RCX("COM17")
+r.snd(2)
+r.LastCmdSerStr #will print the sting below
 b'\x55\xff\x00\x51\xae\x02\xfd\x53\xac'
->>> r.snd(2)
->>> r.LastCmdSerStr
+r.snd(2)
+r.LastCmdSerStr #will print the sting below
 b'\x55\xff\x00\x59\xa6\x02\xfd\x5b\xa4'
 
 ```
