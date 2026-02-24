@@ -89,6 +89,7 @@ rcx.msg(msg)  # where msg is 0 to 255.  Avoid 0.  sets the IR message buffer wit
     >>> r.msg(11) # Motor A with run forward
     >>> r.msg(10) # Motor A with stop and program will end.
 
+```python
 rcx.getval(sourceno, argno) # Reads the value corresponding to the source.  Argument depends on the source and defaut is 0.
     # see documentation at https://www.mralligator.com/rcx/
     # value:
@@ -106,6 +107,7 @@ rcx.getval(sourceno, argno) # Reads the value corresponding to the source.  Argu
     #    SrcClk = 14	Returns minutes since power on. (argno = 0)
     #    SrcMsg = 15	Returns value of message buffer. (argno = 0)
 
+```
     ex.: >>> v = rcx.getval(rcx.SrcSv,rcx.inp2) # v will contain the value of sensor at input #2
     ex.: >>> m = rcx.getval(rcx.SrcMsg) # m will conaint the value of the message in the buffer
 
