@@ -2,7 +2,7 @@
 LEGO RCX PYTHON SERIAL COMMUNICATION MODULE (USING IR TOWER WITH SERIAL DB9 Cable.  NOT FOR USB TOWER)
 
 
-I got an RCX brick few days ago with its Serial IR Tower and I managed to find in this forum and google some information.
+I managed to get an RCX brick with its Serial IR Tower and I managed to find in the Eurobricks forum some information.
 The following link seems to be the most complete to explain the serial protocol and list all opcodes etc...
 
 https://www.mralligator.com/rcx/
@@ -37,6 +37,7 @@ The firmware can be found at: https://pbrick.info/index.html-p=74.html
 ```
 
 Other rcx commands:
+```python
 rcx.alive() : returns True if it detects the RCX, False otherwise.
 rcx.prg(5)  # Set program #5  (can use 1 to 5)
 rcx.start(taskno) # where taskno can be 0 to 9.  Default is 0 if not specified like in rcx.start().  I think starting task 0 is the same as pressing run button on rcx brick.
@@ -68,7 +69,10 @@ rcx.sensor(inputno).mode(Code) # input no = 1, 2, or 3.  mode command is to conf
 rcx.sensor(inputno).clear()  # Clear the counter associated with the specified sensor by setting it to a value of zero.
 
 rcx.msg(msg)  # where msg is 0 to 255.  Avoid 0.  sets the IR message buffer with the given value.
-    message are interesting because one IR tower might be used to make actions on different RCX...
+
+```    
+message are interesting because one IR tower might be used to make actions on different RCX...
+
 
     Simple NQC program to download into RCX (Prog 1) to demonstrate the msg command:
     task main()
