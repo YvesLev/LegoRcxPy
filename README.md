@@ -17,6 +17,7 @@ The firmware can be found at: https://pbrick.info/index.html-p=74.html
 - Copy the LegoRcx.py in your working folder (that you navigate to in the Files left pane of Thonny for ex).
 - Then in the python shell, try the following:
 
+```python
 >>> from legorcx import RCX
 >>> rcx=RCX("COM1")  # use the com port for you IR Tower.  For LINUX, make sure to set user permission for the port as reported by @Gunners TekZone on eurobricks.com. (ex.: ~$ sudo chmod o+rw /dev/ttyUSB0)
 >>> rcx.snd(1) # should play BEEP BEEP
@@ -33,6 +34,7 @@ The firmware can be found at: https://pbrick.info/index.html-p=74.html
 >>> rcx.close()  # Shutdown serial communication and any threads gracefully.
 >>> rcx.pwroff() # Powers off the RCX Brick completely
 
+```
 
 Other rcx commands:
 rcx.alive() : returns True if it detects the RCX, False otherwise.
@@ -110,6 +112,7 @@ rcx.getval(sourceno, argno) # Reads the value corresponding to the source.  Argu
 EDIT: 2026-02-18
 Added LastCmdSerStr function that prints the last serial command byte string.
 Example:
+```python
 >>> from legorcx import RCX
 >>> r=RCX("COM17")
 >>> r.snd(2)
@@ -119,6 +122,7 @@ b'\x55\xff\x00\x51\xae\x02\xfd\x53\xac'
 >>> r.LastCmdSerStr
 b'\x55\xff\x00\x59\xa6\x02\xfd\x5b\xa4'
 
+```
 
 Still in development...
 
